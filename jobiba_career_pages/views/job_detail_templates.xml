@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- JobPosting structured data on Odoo's own job page (search engines read it). -->
+    <template id="job_detail_jobposting" inherit_id="website_hr_recruitment.detail" name="Job detail: JobPosting data">
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <t t-set="jobposting_json" t-value="job._career_jobposting_json()"/>
+            <script t-if="jobposting_json" type="application/ld+json"><t t-out="jobposting_json"/></script>
+        </xpath>
+    </template>
+</odoo>

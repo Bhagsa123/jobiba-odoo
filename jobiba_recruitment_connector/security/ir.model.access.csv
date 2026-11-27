@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jobiba_instance_user,jobiba.instance user,model_jobiba_instance,group_jobiba_user,1,0,0,0
+access_jobiba_instance_manager,jobiba.instance manager,model_jobiba_instance,group_jobiba_manager,1,1,1,1
+access_jobiba_job_mapping_user,jobiba.job.mapping user,model_jobiba_job_mapping,group_jobiba_user,1,0,0,0
+access_jobiba_job_mapping_manager,jobiba.job.mapping manager,model_jobiba_job_mapping,group_jobiba_manager,1,1,0,1
+access_jobiba_sync_job_user,jobiba.sync.job user,model_jobiba_sync_job,group_jobiba_user,1,0,0,0
+access_jobiba_sync_job_manager,jobiba.sync.job manager,model_jobiba_sync_job,group_jobiba_manager,1,1,0,1
+access_jobiba_sync_log_manager,jobiba.sync.log manager,model_jobiba_sync_log,group_jobiba_manager,1,0,0,1
+access_jobiba_webhook_event_manager,jobiba.webhook.event manager,model_jobiba_webhook_event,group_jobiba_manager,1,0,0,1
+access_jobiba_application_mapping_user,jobiba.application.mapping user,model_jobiba_application_mapping,group_jobiba_user,1,0,0,0
+access_jobiba_application_mapping_manager,jobiba.application.mapping manager,model_jobiba_application_mapping,group_jobiba_manager,1,1,0,1
+access_jobiba_connect_wizard,jobiba.connect.wizard,model_jobiba_connect_wizard,group_jobiba_manager,1,1,1,1
+access_jobiba_publish_wizard,jobiba.publish.wizard,model_jobiba_publish_wizard,group_jobiba_user,1,1,1,1
+access_jobiba_publish_wizard_line,jobiba.publish.wizard.line,model_jobiba_publish_wizard_line,group_jobiba_user,1,1,1,1

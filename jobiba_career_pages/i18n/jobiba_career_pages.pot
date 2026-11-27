@@ -1,0 +1,696 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* jobiba_career_pages
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 17:38+0000\n"
+"PO-Revision-Date: 2026-11-26 17:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.job_card
+msgid "<i class=\"fa fa-briefcase\" role=\"img\" aria-label=\"Employment type\"/>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.job_card
+msgid "<i class=\"fa fa-map-marker\" role=\"img\" aria-label=\"Location\"/>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "<option value=\"\">All countries</option>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "<option value=\"\">All teams</option>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "<span class=\"visually-hidden\">Country</span>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "<span class=\"visually-hidden\">Search roles</span>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "<span class=\"visually-hidden\">Team</span>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "<strong>No open role matches that search.</strong>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid ""
+"<strong>There are no open roles right now.</strong> New roles are listed "
+"here when they open."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__accent_color
+msgid "Accent colour"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__active
+msgid "Active"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Add to the website menu"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__slug
+msgid "Address"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Address and scope"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.constraint,message:jobiba_career_pages.constraint_jobiba_career_page_slug_website_unique
+msgid "Another career page already uses this address."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.job_card
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.job_row
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.layout_spotlight
+msgid "Apply"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_page__layout__aurora
+msgid "Aurora: dark hero, job cards"
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+#: model:jobiba.career.page,hero_title:jobiba_career_pages.career_page_default
+msgid "Build your career with us"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__can_publish
+msgid "Can Publish"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model,name:jobiba_career_pages.model_jobiba_career_page
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Career page"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model,name:jobiba_career_pages.model_jobiba_career_perk
+msgid "Career page perk"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.actions.act_window,name:jobiba_career_pages.action_career_page
+#: model:ir.ui.menu,name:jobiba_career_pages.menu_career_pages
+#: model:ir.ui.menu,name:jobiba_career_pages.menu_career_pages_website
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_list
+msgid "Career pages"
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+#: model:jobiba.career.page,name:jobiba_career_pages.career_page_default
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Careers"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "Clear"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__cta_url
+msgid "Closing button link"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__cta_label
+msgid "Closing button text"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__cta_title
+msgid "Closing headline"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Closing section"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__cta_text
+msgid "Closing text"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__company_id
+msgid "Company"
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+#: model:jobiba.career.page,cta_label:jobiba_career_pages.career_page_default
+msgid "Contact us"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__show_stats
+msgid "Counts of roles, locations and departments"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.actions.act_window,help:jobiba_career_pages.action_career_page
+msgid "Create your first career page"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__create_uid
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__create_date
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__show_department_filter
+msgid "Department filter"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Design"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__display_name
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-clock-o
+msgid "Flexible hours"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-line-chart
+msgid "Growth"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Headline"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-heartbeat
+msgid "Health"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__hero_image
+msgid "Hero Image"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__hero_subtitle
+msgid "Hero Subtitle"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__hero_title
+msgid "Hero Title"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__id
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__id
+msgid "ID"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__icon
+msgid "Icon"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__intro
+msgid "Intro"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Introduction (optional)"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__is_published
+msgid "Is Published"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__job_count
+msgid "Job Count"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model,name:jobiba_career_pages.model_hr_job
+msgid "Job Position"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Job list"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "Jobiba"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "Jobs also on"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_list
+msgid "Jobs listed"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__write_uid
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__write_date
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__layout
+msgid "Layout"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-graduation-cap
+msgid "Learning"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,help:jobiba_career_pages.field_jobiba_career_page__department_ids
+msgid "Leave empty to list every published job."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_page__layout__ledger
+msgid "Ledger: clean list, one row per job"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid ""
+"List only what your company really offers. Leave the list empty to hide the "
+"section."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__show_location_filter
+msgid "Location filter"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-cutlery
+msgid "Meals"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_page__layout__mosaic
+msgid "Mosaic: jobs grouped by department"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__name
+msgid "Name"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.layout_spotlight
+msgid "Newest role"
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+#: model:jobiba.career.page,cta_title:jobiba_career_pages.career_page_default
+msgid "No role that fits today?"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid ""
+"Not published yet: visitors get \"page not found\". Use the Publish button "
+"on the page itself, or the button on the right."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__department_ids
+msgid "Only these departments"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "Open roles"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Open the page"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-star
+msgid "Other"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.layout_mosaic
+msgid "Other roles"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__page_id
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Page"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-money
+msgid "Pay"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__perk_ids
+msgid "Perk"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Perks"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__show_perks
+msgid "Perks section"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.actions.act_window,help:jobiba_career_pages.action_career_page
+msgid ""
+"Pick a layout and a colour, write a headline, and publish. The page lists "
+"the jobs you published on your website."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid "Published jobs listed"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-home
+msgid "Remote work"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,help:jobiba_career_pages.field_jobiba_career_page__website_id
+msgid "Restrict to a specific website."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__is_seo_optimized
+msgid "SEO optimized"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-shield
+msgid "Safety"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "Search"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__show_search
+msgid "Search box"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "Search roles"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "See every open role"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "See open roles"
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+#: model:jobiba.career.page,hero_subtitle:jobiba_career_pages.career_page_default
+msgid "See our open roles and apply in a few minutes."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__seo_name
+msgid "Seo name"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__sequence
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__show_jobiba_credit
+msgid "Show 'Jobs also on Jobiba' line"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__show_salary
+msgid "Show pay when a job states it"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,help:jobiba_career_pages.field_jobiba_career_page__intro
+msgid "Shown under the headline. Say who you are and how you hire."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_page__layout__spotlight
+msgid "Spotlight: newest job featured, then the list"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-users
+msgid "Team"
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+#: model:jobiba.career.page,cta_text:jobiba_career_pages.career_page_default
+msgid "Tell us about yourself and we will keep you in mind."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__text
+msgid "Text"
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+msgid "The accent colour must look like #0f9d6e."
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+msgid ""
+"The address may hold lower-case letters, digits and single dashes only."
+msgstr ""
+
+#. module: jobiba_career_pages
+#. odoo-python
+#: code:addons/jobiba_career_pages/models/career_page.py:0
+msgid "The closing button link must start with /, https:// or mailto:"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,help:jobiba_career_pages.field_jobiba_career_page__website_url
+msgid "The full URL to access the document through the website."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,help:jobiba_career_pages.field_jobiba_career_page__slug
+msgid ""
+"The page is served at /careers/<address>. The page with the address "
+"'careers' is also served at /careers."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page_view_form
+msgid ""
+"The page lists job positions that are published on the website. Pay is shown"
+" only from the job's Jobiba tab (lowest, highest, currency) and never from "
+"internal salary data."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "This career page is not published. Only website editors can see it."
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_perk__name
+msgid "Title"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-bus
+msgid "Transport"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields.selection,name:jobiba_career_pages.selection__jobiba_career_perk__icon__fa-plane
+msgid "Travel"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.job_card
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.layout_spotlight
+msgid "View the job <span aria-hidden=\"true\">→</span>"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__website_published
+msgid "Visible on current website"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__website_id
+msgid "Website"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__website_url
+msgid "Website URL"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__website_meta_description
+msgid "Website meta description"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__website_meta_keywords
+msgid "Website meta keywords"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__website_meta_title
+msgid "Website meta title"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model:ir.model.fields,field_description:jobiba_career_pages.field_jobiba_career_page__website_meta_og_img
+msgid "Website opengraph image"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "What we offer"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "location"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "locations"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "open"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "role"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "roles"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "team"
+msgstr ""
+
+#. module: jobiba_career_pages
+#: model_terms:ir.ui.view,arch_db:jobiba_career_pages.career_page
+msgid "teams"
+msgstr ""

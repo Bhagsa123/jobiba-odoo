@@ -1,0 +1,54 @@
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <h2 class="oe_slogan">Jobiba Recruitment Sync</h2>
+    <h3 class="oe_slogan">Publish Odoo job positions on Jobiba. Receive applicants in your Odoo pipeline.</h3>
+    <p>Odoo stays your system of record for vacancies and applicants. Jobiba, a job marketplace, adds reach.</p>
+    <img class="oe_picture oe_screenshot" src="screenshot_connection.png" alt="The Jobiba connection screen in Odoo Recruitment: jobs published, waiting for review, in the queue, applications received"/>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <h3>What it does</h3>
+    <ul>
+      <li><strong>Publish and update jobs.</strong> Preview exactly what is sent, publish one job or many, and later edits in Odoo are sent by themselves. The same job is updated, never duplicated.</li>
+      <li><strong>See what happened to each job.</strong> Queued, waiting for Jobiba's review, published, not approved or closed, with the reason when something failed.</li>
+      <li><strong>Close from Odoo.</strong> "Close on Jobiba" on the job, or archiving it, takes the listing offline.</li>
+      <li><strong>Applicants in Odoo.</strong> When someone applies on Jobiba, a native applicant is created in the right job position with the source "Jobiba" and a link to the application on Jobiba.</li>
+      <li><strong>Details and CVs (paid Jobiba plan).</strong> With applicant sync switched on in Jobiba, the applicant's email, phone, answers and CV are written into the Odoo applicant. Jobiba sends them only for applications whose candidate was shown its transfer notice.</li>
+      <li><strong>Withdrawals.</strong> If a candidate withdraws on Jobiba, the Odoo applicant gets a note and nothing more is imported. Odoo's stage is yours to change.</li>
+      <li><strong>Your plan, in Odoo.</strong> The plan, the number of open jobs it allows and whether details are sent are read from Jobiba. Promotion and plans open on Jobiba's own pages.</li>
+      <li><strong>Approval, roles, multi-company.</strong> A recruitment administrator approves a job for outside advertising; one Jobiba employer account per Odoo company, with record rules.</li>
+    </ul>
+    <img class="oe_picture oe_screenshot" src="screenshot_job.png" alt="The Jobiba tab of an Odoo job position: state Published, what is shown on Jobiba, pay with its currency and period"/>
+    <img class="oe_picture oe_screenshot" src="screenshot_preview.png" alt="Preview before publishing: the exact fields and text Jobiba will receive for one job"/>
+    <img class="oe_picture oe_screenshot" src="screenshot_applicant.png" alt="An applicant created in Odoo from an application made on Jobiba"/>
+    <h3>What it does not do</h3>
+    <ul>
+      <li>It is not a second applicant tracking system: stages, interviews and offers stay in Odoo Recruitment. A stage on Jobiba never moves a stage in Odoo.</li>
+      <li>Without a paid Jobiba plan it does not copy email, phone or CV into Odoo: the applicant record links to Jobiba.</li>
+      <li>No talent search or AI matching inside Odoo yet.</li>
+      <li>It never takes a payment: plans and promotion are bought on Jobiba.</li>
+    </ul>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <h3>External service and data</h3>
+    <p>This module needs an external service: <strong>jobiba.com</strong>. Nothing is sent before an integration administrator ticks "I agree" on the connection screen, which lists the same data as this page and records who agreed and when.</p>
+    <p><strong>Sent to jobiba.com:</strong> your API key with each request. For each job you publish: a reference made of your database ID, company ID and job ID; the title; the location; the description; and, when you fill them in, an application link, the pay with its currency and period, job type, work mode and experience level. The references of jobs you sent and the Jobiba numbers of applications already imported, to ask where they stand. No applicant, employee or other record of your database is sent.</p>
+    <p><strong>Received from jobiba.com:</strong> your plan and limits, the state of the jobs you sent, and your own applications: name, job and stage, and, on a paid Jobiba plan with applicant sync switched on in Jobiba, email, phone, answers and CV files. Signed webhooks are optional and carry an applicant's name, the job and the stage.</p>
+    <p>Jobiba's privacy policy is at jobiba.com/privacy.</p>
+    <p><strong>You need:</strong> a Jobiba employer account with a confirmed company email (the Free plan holds 3 open jobs through the connection), the connection switched on in Jobiba (Employer dashboard, Integrations), and an Odoo server that can reach jobiba.com over HTTPS. Jobiba plans and payments are handled on Jobiba; this module never asks for card details.</p>
+    <h3>Setup</h3>
+    <ol>
+      <li>Install the module (Odoo.sh or self-hosted) with Recruitment.</li>
+      <li>In Jobiba, open Employer dashboard, Integrations, and switch on "Connect my hiring system". Then copy your API key there.</li>
+      <li>In Odoo: Recruitment › Jobiba › Connection. Create a connection and press Connect.</li>
+      <li>Paste the API key, read what is sent, tick "I agree" and press "Save and test". Odoo tests the key without creating anything and shows your plan.</li>
+      <li>Optional: register the webhook address shown in Jobiba and paste the signing secret, then press "Send a test" in Jobiba. Without it Odoo reads new applications every 10 minutes.</li>
+      <li>Open a job position, tick "Approved for Jobiba" in the Jobiba tab, fill in the pay if you publish it, and press "Preview and publish".</li>
+    </ol>
+    <p>Odoo Online (Standard and One App Free) cannot install custom Python modules, so this module does not run there.</p>
+    <p>The screenshots show sample data made for the pictures. Support: info@jobiba.com</p>
+  </div>
+</section>

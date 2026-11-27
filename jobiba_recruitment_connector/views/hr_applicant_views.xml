@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_applicant_view_form_jobiba" model="ir.ui.view">
+        <field name="name">hr.applicant.form.jobiba</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="priority">40</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Jobiba" name="jobiba_page" invisible="not is_jobiba">
+                    <field name="is_jobiba" invisible="1"/>
+                    <div class="alert alert-warning" role="status" invisible="not jobiba_withdrawn_at or jobiba_erased_at">
+                        The candidate withdrew this application on Jobiba on <field name="jobiba_withdrawn_at" nolabel="1" class="d-inline"/>.
+                    </div>
+                    <div class="alert alert-warning" role="status" invisible="not jobiba_erased_at">
+                        This person deleted their Jobiba account on or before <field name="jobiba_erased_at" nolabel="1" class="d-inline"/>. Jobiba sends nothing more about this application. Decide, under your own retention rules, whether to keep the details held here.
+                    </div>
+                    <group>
+                        <group string="Source">
+                            <field name="jobiba_applied_at"/>
+                            <field name="jobiba_external_stage"/>
+                            <field name="jobiba_application_ref" groups="base.group_no_one"/>
+                        </group>
+                        <group string="Contact details and CV">
+                            <field name="jobiba_detail_state"/>
+                            <field name="jobiba_detail_note" invisible="not jobiba_detail_note"/>
+                            <div colspan="2">
+                                <p invisible="jobiba_detail_state != 'link'">This applicant arrived with a name and a link. Contact details, answers and the CV are on Jobiba. On a paid Jobiba plan with applicant sync switched on they are written here.</p>
+                                <button name="action_jobiba_open" type="object" string="Open the applicant on Jobiba" class="btn-primary" icon="fa-external-link" invisible="not jobiba_url"/>
+                                <button name="action_jobiba_fetch_details" type="object" string="Fetch details from Jobiba" class="ms-2" invisible="jobiba_detail_state != 'link'"/>
+                            </div>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_applicant_view_search_jobiba" model="ir.ui.view">
+        <field name="name">hr.applicant.search.jobiba</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_search_bis"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter name="from_jobiba" string="From Jobiba" domain="[('is_jobiba', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

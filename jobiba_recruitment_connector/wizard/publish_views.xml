@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="jobiba_publish_wizard_view_form" model="ir.ui.view">
+        <field name="name">jobiba.publish.wizard.form</field>
+        <field name="model">jobiba.publish.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Publish on Jobiba">
+                <field name="done" invisible="1"/>
+                <field name="single" invisible="1"/>
+                <field name="job_ids" invisible="1"/>
+                <sheet>
+                    <div class="alert alert-info" role="status" invisible="not done">
+                        <p class="mb-1"><strong>Result</strong></p>
+                        <field name="summary" nolabel="1"/>
+                    </div>
+                    <div invisible="done">
+                    <p invisible="single">
+                        <field name="ready_count" class="d-inline fw-bold"/> ready to publish ·
+                        <field name="blocked_count" class="d-inline fw-bold"/> need a fix first.
+                        Jobs that need a fix are skipped; the others are sent.
+                    </p>
+                    <field name="line_ids" nolabel="1" readonly="1">
+                        <list decoration-danger="not ready" decoration-success="ready">
+                            <field name="job_id"/>
+                            <field name="ready" widget="boolean_toggle" readonly="1"/>
+                            <field name="problems"/>
+                            <field name="warnings" optional="show"/>
+                        </list>
+                        <form>
+                            <group><field name="job_id"/></group>
+                            <div class="alert alert-danger" role="alert" invisible="ready"><field name="problems" nolabel="1"/></div>
+                            <div class="alert alert-warning" role="status" invisible="not warnings"><field name="warnings" nolabel="1"/></div>
+                            <field name="ready" invisible="1"/>
+                            <separator string="What Jobiba will receive"/>
+                            <field name="preview" nolabel="1"/>
+                        </form>
+                    </field>
+                    <p class="text-muted">Open a line to see exactly what is sent. Jobiba reviews each new job ad before it goes live; edits you make later in Odoo are sent by themselves.</p>
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="action_publish" type="object" string="Publish on Jobiba" class="btn-primary" invisible="done or not ready_count"/>
+                    <button name="action_close" type="object" string="Done" class="btn-primary" invisible="not done"/>
+                    <button string="Close" special="cancel" invisible="done"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
