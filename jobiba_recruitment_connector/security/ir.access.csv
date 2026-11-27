@@ -1,0 +1,20 @@
+id,name,model_id,group_id/id,operation,domain
+access_jobiba_instance_user,jobiba.instance user,jobiba.instance,group_jobiba_user,r,
+access_jobiba_instance_manager,jobiba.instance manager,jobiba.instance,group_jobiba_manager,crud,
+access_jobiba_job_mapping_user,jobiba.job.mapping user,jobiba.job.mapping,group_jobiba_user,r,
+access_jobiba_job_mapping_manager,jobiba.job.mapping manager,jobiba.job.mapping,group_jobiba_manager,rud,
+access_jobiba_sync_job_user,jobiba.sync.job user,jobiba.sync.job,group_jobiba_user,r,
+access_jobiba_sync_job_manager,jobiba.sync.job manager,jobiba.sync.job,group_jobiba_manager,rud,
+access_jobiba_sync_log_manager,jobiba.sync.log manager,jobiba.sync.log,group_jobiba_manager,rd,
+access_jobiba_webhook_event_manager,jobiba.webhook.event manager,jobiba.webhook.event,group_jobiba_manager,rd,
+access_jobiba_application_mapping_user,jobiba.application.mapping user,jobiba.application.mapping,group_jobiba_user,r,
+access_jobiba_application_mapping_manager,jobiba.application.mapping manager,jobiba.application.mapping,group_jobiba_manager,rud,
+access_jobiba_connect_wizard,jobiba.connect.wizard,jobiba.connect.wizard,group_jobiba_manager,crud,
+access_jobiba_publish_wizard,jobiba.publish.wizard,jobiba.publish.wizard,group_jobiba_user,crud,
+access_jobiba_publish_wizard_line,jobiba.publish.wizard.line,jobiba.publish.wizard.line,group_jobiba_user,crud,
+rule_jobiba_instance_company,Jobiba connection: own companies,jobiba.instance,,crud,"[('company_id', 'in', company_ids)]"
+rule_jobiba_job_mapping_company,Jobiba job link: own companies,jobiba.job.mapping,,crud,"[('company_id', 'in', company_ids)]"
+rule_jobiba_sync_job_company,Jobiba queue: own companies,jobiba.sync.job,,crud,"[('company_id', 'in', company_ids)]"
+rule_jobiba_sync_log_company,Jobiba log: own companies,jobiba.sync.log,,crud,"[('company_id', 'in', company_ids)]"
+rule_jobiba_webhook_event_company,Jobiba webhook event: own companies,jobiba.webhook.event,,crud,"[('company_id', 'in', company_ids)]"
+rule_jobiba_application_mapping_company,Jobiba application link: own companies,jobiba.application.mapping,,crud,"[('company_id', 'in', company_ids)]"

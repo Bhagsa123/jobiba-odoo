@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Jobs on Jobiba -->
+    <record id="jobiba_job_mapping_view_list" model="ir.ui.view">
+        <field name="name">jobiba.job.mapping.list</field>
+        <field name="model">jobiba.job.mapping</field>
+        <field name="arch" type="xml">
+            <list string="Jobs on Jobiba" create="0" edit="0">
+                <field name="job_name" string="Job"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="remote_state" widget="badge" decoration-success="remote_state == 'published'" decoration-info="remote_state in ('queued', 'in_review')" decoration-danger="remote_state == 'failed'" decoration-warning="remote_state == 'orphan'" decoration-muted="remote_state in ('draft', 'stopped')"/>
+                <field name="last_synced_at"/>
+                <field name="next_retry_at" optional="show"/>
+                <field name="last_error" optional="show"/>
+                <field name="listing_url" widget="url" optional="show"/>
+                <field name="reference" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="jobiba_job_mapping_view_form" model="ir.ui.view">
+        <field name="name">jobiba.job.mapping.form</field>
+        <field name="model">jobiba.job.mapping</field>
+        <field name="arch" type="xml">
+            <form string="Job on Jobiba" create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="job_id"/>
+                            <field name="job_name" invisible="job_id"/>
+                            <field name="instance_id"/>
+                            <field name="intent"/>
+                            <field name="remote_state"/>
+                        </group>
+                        <group>
+                            <field name="reference"/>
+                            <field name="jobiba_job_id"/>
+                            <field name="listing_url" widget="url"/>
+                            <field name="first_sent_at"/>
+                            <field name="last_synced_at"/>
+                        </group>
+                    </group>
+                    <group string="Last problem" invisible="not last_error and not problems">
+                        <field name="last_error"/>
+                        <field name="problems"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="jobiba_job_mapping_view_search" model="ir.ui.view">
+        <field name="name">jobiba.job.mapping.search</field>
+        <field name="model">jobiba.job.mapping</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="job_name"/>
+                <field name="reference"/>
+                <filter name="published" string="Published" domain="[('remote_state', '=', 'published')]"/>
+                <filter name="in_review" string="Waiting for review" domain="[('remote_state', '=', 'in_review')]"/>
+                <filter name="failed" string="To fix" domain="[('remote_state', '=', 'failed')]"/>
+                <filter name="orphan" string="Odoo job deleted" domain="[('remote_state', '=', 'orphan')]"/>
+                <group>
+                    <filter name="by_state" string="State" context="{'group_by': 'remote_state'}"/>
+                    <filter name="by_company" string="Company" context="{'group_by': 'company_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_jobiba_job_mapping" model="ir.actions.act_window">
+        <field name="name">Jobs on Jobiba</field>
+        <field name="res_model">jobiba.job.mapping</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No job has been sent to Jobiba yet</p>
+            <p>Open a job position and use Publish on Jobiba.</p>
+        </field>
+    </record>
+
+    <!-- Queue -->
+    <record id="jobiba_sync_job_view_list" model="ir.ui.view">
+        <field name="name">jobiba.sync.job.list</field>
+        <field name="model">jobiba.sync.job</field>
+        <field name="arch" type="xml">
+            <list string="Publishing queue" create="0" edit="0">
+                <header>
+                    <button name="action_retry" type="object" string="Retry" groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+                    <button name="action_cancel" type="object" string="Cancel" groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+                </header>
+                <field name="create_date" string="Queued"/>
+                <field name="mapping_id" string="Job"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state in ('queued', 'processing')" decoration-warning="state == 'retry'" decoration-danger="state in ('blocked', 'dead_letter')" decoration-muted="state == 'cancelled'"/>
+                <field name="attempts"/>
+                <field name="next_retry_at"/>
+                <field name="http_status" optional="show"/>
+                <field name="last_error"/>
+                <field name="correlation_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="jobiba_sync_job_view_search" model="ir.ui.view">
+        <field name="name">jobiba.sync.job.search</field>
+        <field name="model">jobiba.sync.job</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="mapping_id"/>
+                <field name="correlation_id"/>
+                <filter name="open" string="Waiting" domain="[('state', 'in', ('queued', 'retry', 'processing'))]"/>
+                <filter name="stuck" string="Blocked or gave up" domain="[('state', 'in', ('blocked', 'dead_letter'))]"/>
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                <group>
+                    <filter name="by_state" string="State" context="{'group_by': 'state'}"/>
+                    <filter name="by_day" string="Day" context="{'group_by': 'create_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_jobiba_sync_job" model="ir.actions.act_window">
+        <field name="name">Publishing queue</field>
+        <field name="res_model">jobiba.sync.job</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'search_default_open': 1, 'search_default_stuck': 1}</field>
+    </record>
+
+    <!-- Applications received -->
+    <record id="jobiba_application_mapping_view_list" model="ir.ui.view">
+        <field name="name">jobiba.application.mapping.list</field>
+        <field name="model">jobiba.application.mapping</field>
+        <field name="arch" type="xml">
+            <list string="Jobiba applications" create="0" edit="0">
+                <field name="applied_at" string="Received"/>
+                <field name="applicant_id"/>
+                <field name="job_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="external_stage"/>
+                <field name="withdrawn_at" optional="show"/>
+                <field name="applicants_url" widget="url" optional="show"/>
+                <field name="application_ref" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_jobiba_application_mapping" model="ir.actions.act_window">
+        <field name="name">Applications from Jobiba</field>
+        <field name="res_model">jobiba.application.mapping</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No application has arrived from Jobiba yet</p>
+            <p>Applications appear here, and as applicants in the job's pipeline, once Jobiba's webhook is registered and tested.</p>
+        </field>
+    </record>
+</odoo>

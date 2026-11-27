@@ -1,0 +1,44 @@
+// Jobiba connector: small backend styles. Brand green from the Jobiba mark.
+$jobiba-green: #0f9d6e;
+$jobiba-ink: #0b2a22;
+
+.o_jobiba_hero {
+    background: linear-gradient(135deg, $jobiba-ink 0%, #114b3c 60%, $jobiba-green 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    .o_jobiba_hero_title { font-size: 1.35rem; font-weight: 700; margin: 0; }
+    .o_jobiba_hero_sub { opacity: .85; margin: 4px 0 0; }
+    .o_jobiba_pill {
+        display: inline-block; padding: 3px 12px; border-radius: 999px; font-weight: 600; font-size: .8rem;
+        background: rgba(255, 255, 255, .16);
+        &.ok { background: #b9f6ca; color: $jobiba-ink; }
+        &.waiting { background: #ffe58a; color: #4a3b00; }
+        &.problem { background: #ffc4c4; color: #5a0d0d; }
+    }
+}
+.o_jobiba_tiles {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px;
+    .o_jobiba_tile {
+        border: 1px solid var(--o-border-color, #dee2e6); border-radius: 12px; padding: 14px 16px; background: var(--o-view-background-color, #fff);
+        .o_jobiba_tile_num { font-size: 1.6rem; font-weight: 700; line-height: 1.1; color: $jobiba-ink; }
+        .o_jobiba_tile_label { color: #6c757d; font-size: .82rem; }
+        &.warn .o_jobiba_tile_num { color: #b45309; }
+        &.bad .o_jobiba_tile_num { color: #b42318; }
+    }
+}
+.o_jobiba_steps {
+    counter-reset: step; list-style: none; padding: 0; margin: 0;
+    li { counter-increment: step; position: relative; padding: 0 0 12px 40px; }
+    li::before {
+        content: counter(step); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%;
+        background: $jobiba-green; color: #fff; font-weight: 700; text-align: center; line-height: 26px; font-size: .85rem;
+    }
+}
+.o_jobiba_preview { th { width: 34%; color: #6c757d; font-weight: 500; } }
+.o_jobiba_preview_text {
+    white-space: pre-line; background: var(--o-webclient-background-color, #f6f7f9); border-radius: 10px;
+    padding: 12px 14px; max-height: 220px; overflow: auto; font-size: .9rem;
+}
+.o_jobiba_copy input { font-family: var(--bs-font-monospace, monospace); font-size: .82rem; }

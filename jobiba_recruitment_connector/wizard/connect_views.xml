@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="jobiba_connect_wizard_view_form" model="ir.ui.view">
+        <field name="name">jobiba.connect.wizard.form</field>
+        <field name="model">jobiba.connect.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Connect to Jobiba">
+                <field name="instance_id" invisible="1"/>
+                <field name="result_ok" invisible="1"/>
+                <field name="api_key_set" invisible="1"/>
+                <field name="webhook_secret_set" invisible="1"/>
+                <div class="alert alert-success" role="status" invisible="not result or not result_ok"><field name="result" nolabel="1"/></div>
+                <div class="alert alert-danger" role="alert" invisible="not result or result_ok"><field name="result" nolabel="1"/></div>
+                <sheet>
+                    <p><strong>Before you start:</strong> a Jobiba employer account with a confirmed company email, and its account owner at hand. In Jobiba, the owner switches the connection on first (Employer dashboard, Integrations, "Connect my hiring system"). The Free plan holds 3 open jobs through this connection. This Odoo server must reach jobiba.com over HTTPS.</p>
+                    <ol class="o_jobiba_steps">
+                        <li>
+                            <strong>API key.</strong> Open <field name="api_key_page_url" widget="url" nolabel="1" class="d-inline"/>, create a key and paste it here.
+                            <group>
+                                <field name="api_key" password="True" placeholder="Paste the key" required="not api_key_set"/>
+                                <field name="base_url" groups="base.group_no_one"/>
+                            </group>
+                            <span class="text-muted" invisible="not api_key_set">A key is already saved. Leave the field empty to keep it, or paste a new key to replace it.</span>
+                        </li>
+                        <li>
+                            <strong>Applications from Jobiba (optional now, can be added later).</strong> In Jobiba, open
+                            <field name="webhooks_setup_url" widget="url" nolabel="1" class="d-inline"/>, add this address and choose the application events:
+                            <div class="o_jobiba_copy my-2"><field name="webhook_url" widget="CopyClipboardChar" nolabel="1"/></div>
+                            Jobiba then shows a signing secret. Paste it here, save, and press "Send a test" in Jobiba.
+                            <group>
+                                <field name="webhook_secret" password="True" placeholder="Paste the signing secret"/>
+                            </group>
+                        </li>
+                        <li><strong>Save and test.</strong> Odoo checks the key against Jobiba without creating anything.</li>
+                    </ol>
+                    <div class="alert alert-info" role="status">
+                        <p class="mb-1"><strong>What this Odoo database sends to jobiba.com</strong></p>
+                        <ul class="mb-2">
+                            <li>The API key, with every request.</li>
+                            <li>For each job position you publish: a reference made of this database's ID, the company ID and the job ID; the title; the location; the description; and, when you filled them in, the application link, the pay with its currency and period, job type, work mode and experience level. "Preview and publish" on a job shows the exact data first.</li>
+                            <li>The references of jobs you sent (to read their state or to close them) and the Jobiba numbers of applications Odoo already holds (to ask where they stand).</li>
+                        </ul>
+                        <p class="mb-2">No applicant, employee or other record of this database is sent. Odoo reads from Jobiba your plan, the state of your jobs and your own applications (contact details, answers and CVs only on a paid Jobiba plan with applicant details switched on in Jobiba).
+                            Privacy policy: <a href="https://jobiba.com/privacy#employer-hiring-system" target="_blank" rel="noopener noreferrer">jobiba.com/privacy</a></p>
+                        <div class="d-flex align-items-start gap-2">
+                            <field name="data_consent" nolabel="1" readonly="result_ok"/>
+                            <label for="data_consent" class="fw-bold mb-0"/>
+                        </div>
+                    </div>
+                    <p class="text-muted">The key and the secret are stored on the Odoo server and are never sent back to a browser or written to a log. Odoo database administrators can read stored values; to keep the key out of the database, set <code>jobiba_api_key_&lt;connection id&gt;</code> in odoo.conf instead.</p>
+                </sheet>
+                <footer>
+                    <button name="action_connect" type="object" string="Save and test" class="btn-primary"/>
+                    <button string="Close" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

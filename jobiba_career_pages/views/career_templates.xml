@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- One job, as a card. Used by Aurora, Mosaic and Spotlight. -->
+    <template id="job_card" name="Career page: job card">
+        <article class="jcp-card">
+            <div class="jcp-card-top">
+                <span t-if="job.department_id" class="jcp-chip" t-out="job.department_id.name"/>
+                <span t-if="job.jobiba_remote_type" class="jcp-chip jcp-chip-soft" t-out="dict(job._fields['jobiba_remote_type']._description_selection(job.env)).get(job.jobiba_remote_type)"/>
+            </div>
+            <h3 class="jcp-card-title"><a t-att-href="job.website_url" t-out="job.name"/></h3>
+            <p class="jcp-meta">
+                <t t-set="place" t-value="job._career_location()"/>
+                <span t-if="place"><i class="fa fa-map-marker" role="img" aria-label="Location"/> <t t-out="place"/></span>
+                <span t-if="job._career_employment_type()"><i class="fa fa-briefcase" role="img" aria-label="Employment type"/> <t t-out="job._career_employment_type()"/></span>
+                <t t-set="pay" t-value="career.show_salary and job._career_pay()"/>
+                <span t-if="pay" class="jcp-pay"><t t-out="pay"/></span>
+            </p>
+            <div class="jcp-card-actions">
+                <a class="jcp-btn jcp-btn-primary" t-attf-href="/jobs/apply/#{slug(job)}">Apply</a>
+                <a class="jcp-link" t-att-href="job.website_url">View the job <span aria-hidden="true">→</span></a>
+            </div>
+        </article>
+    </template>
+
+    <!-- One job, as a row. Used by Ledger. -->
+    <template id="job_row" name="Career page: job row">
+        <li class="jcp-row">
+            <div class="jcp-row-main">
+                <a class="jcp-row-title" t-att-href="job.website_url" t-out="job.name"/>
+                <p class="jcp-meta">
+                    <span t-if="job.department_id" t-out="job.department_id.name"/>
+                    <t t-set="place" t-value="job._career_location()"/>
+                    <span t-if="place" t-out="place"/>
+                    <span t-if="job._career_employment_type()" t-out="job._career_employment_type()"/>
+                    <t t-set="pay" t-value="career.show_salary and job._career_pay()"/>
+                    <span t-if="pay" class="jcp-pay" t-out="pay"/>
+                </p>
+            </div>
+            <a class="jcp-btn jcp-btn-outline" t-attf-href="/jobs/apply/#{slug(job)}">Apply</a>
+        </li>
+    </template>
+
+    <template id="layout_aurora" name="Career layout: Aurora">
+        <div class="jcp-grid">
+            <t t-foreach="jobs" t-as="job"><t t-call="jobiba_career_pages.job_card"/></t>
+        </div>
+    </template>
+
+    <template id="layout_ledger" name="Career layout: Ledger">
+        <ul class="jcp-list">
+            <t t-foreach="jobs" t-as="job"><t t-call="jobiba_career_pages.job_row"/></t>
+        </ul>
+    </template>
+
+    <template id="layout_mosaic" name="Career layout: Mosaic">
+        <t t-foreach="job_groups" t-as="group">
+            <section class="jcp-group">
+                <h3 class="jcp-group-title">
+                    <t t-if="group[0]" t-out="group[0]"/><t t-else="">Other roles</t>
+                    <span class="jcp-count" t-out="len(group[1])"/>
+                </h3>
+                <div class="jcp-grid">
+                    <t t-foreach="group[1]" t-as="job"><t t-call="jobiba_career_pages.job_card"/></t>
+                </div>
+            </section>
+        </t>
+    </template>
+
+    <template id="layout_spotlight" name="Career layout: Spotlight">
+        <t t-set="lead" t-value="jobs[:1]"/>
+        <t t-foreach="lead" t-as="job">
+            <article class="jcp-spot">
+                <p class="jcp-eyebrow">Newest role</p>
+                <h3 class="jcp-spot-title"><a t-att-href="job.website_url" t-out="job.name"/></h3>
+                <p class="jcp-meta">
+                    <span t-if="job.department_id" t-out="job.department_id.name"/>
+                    <t t-set="place" t-value="job._career_location()"/>
+                    <span t-if="place" t-out="place"/>
+                    <t t-set="pay" t-value="career.show_salary and job._career_pay()"/>
+                    <span t-if="pay" class="jcp-pay" t-out="pay"/>
+                </p>
+                <div class="jcp-card-actions">
+                    <a class="jcp-btn jcp-btn-primary" t-attf-href="/jobs/apply/#{slug(job)}">Apply</a>
+                    <a class="jcp-link" t-att-href="job.website_url">View the job <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+        </t>
+        <ul class="jcp-list" t-if="len(jobs) &gt; 1">
+            <t t-foreach="jobs[1:]" t-as="job"><t t-call="jobiba_career_pages.job_row"/></t>
+        </ul>
+    </template>
+
+    <template id="career_page" name="Career page">
+        <!-- Set before the call: Odoo 20.0 no longer reads variables set inside a t-call body. -->
+        <t t-set="additional_title" t-value="career.name"/>
+        <t t-set="head">
+            <meta t-if="noindex" name="robots" content="noindex, follow"/>
+            <script t-if="item_list_json" type="application/ld+json"><t t-out="item_list_json"/></script>
+        </t>
+        <t t-call="website.layout">
+            <div id="wrap" t-attf-class="jcp jcp-#{career.layout}" t-attf-style="--jcp-accent: #{career.accent_color};">
+                <div t-if="not career.website_published" class="jcp-draft" role="status">
+                    This career page is not published. Only website editors can see it.
+                </div>
+                <header t-attf-class="jcp-hero #{'jcp-hero-image' if career.hero_image else ''}"
+                        t-att-style="career.hero_image and 'background-image: linear-gradient(180deg, rgba(8,24,20,.55), rgba(8,24,20,.82)), url(%s);' % website.image_url(career, 'hero_image') or None">
+                    <div class="container">
+                        <p class="jcp-eyebrow" t-out="(career.company_id or res_company).name"/>
+                        <h1 class="jcp-hero-title" t-out="career.hero_title or career.name"/>
+                        <p t-if="career.hero_subtitle" class="jcp-hero-sub" t-out="career.hero_subtitle"/>
+                        <ul t-if="career.show_stats and facets['total']" class="jcp-stats">
+                            <li><strong t-out="facets['total']"/> <span>open <t t-if="facets['total'] == 1">role</t><t t-else="">roles</t></span></li>
+                            <li t-if="facets['location_count']"><strong t-out="facets['location_count']"/> <span><t t-if="facets['location_count'] == 1">location</t><t t-else="">locations</t></span></li>
+                            <li t-if="len(facets['departments'])"><strong t-out="len(facets['departments'])"/> <span><t t-if="len(facets['departments']) == 1">team</t><t t-else="">teams</t></span></li>
+                        </ul>
+                        <a class="jcp-btn jcp-btn-light" href="#jcp-jobs">See open roles</a>
+                    </div>
+                </header>
+
+                <section t-if="career.intro" class="jcp-intro"><div class="container" t-field="career.intro"/></section>
+
+                <section t-if="career.show_perks and career.perk_ids" class="jcp-perks" aria-label="What we offer">
+                    <div class="container">
+                        <h2 class="jcp-h2">What we offer</h2>
+                        <ul class="jcp-perk-grid">
+                            <li t-foreach="career.perk_ids" t-as="perk" class="jcp-perk">
+                                <i t-attf-class="fa #{perk.icon}" aria-hidden="true"/>
+                                <strong t-out="perk.name"/>
+                                <span t-if="perk.text" t-out="perk.text"/>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="jcp-jobs" class="jcp-jobs">
+                    <div class="container">
+                        <div class="jcp-jobs-head">
+                            <h2 class="jcp-h2">Open roles <span class="jcp-count" t-out="total"/></h2>
+                            <form t-if="career.show_search or career.show_department_filter or career.show_location_filter"
+                                  class="jcp-filters" method="get" t-att-action="career.website_url" role="search">
+                                <label t-if="career.show_search" class="jcp-field">
+                                    <span class="visually-hidden">Search roles</span>
+                                    <input type="search" name="q" t-att-value="search" placeholder="Search roles" maxlength="80"/>
+                                </label>
+                                <label t-if="career.show_department_filter and len(facets['departments']) &gt; 1" class="jcp-field">
+                                    <span class="visually-hidden">Team</span>
+                                    <select name="department">
+                                        <option value="">All teams</option>
+                                        <option t-foreach="facets['departments']" t-as="dept" t-att-value="dept.id" t-att-selected="dept == department and 'selected' or None" t-out="dept.name"/>
+                                    </select>
+                                </label>
+                                <label t-if="career.show_location_filter and len(facets['countries']) &gt; 1" class="jcp-field">
+                                    <span class="visually-hidden">Country</span>
+                                    <select name="country">
+                                        <option value="">All countries</option>
+                                        <option t-foreach="facets['countries']" t-as="place" t-att-value="place.id" t-att-selected="place == country and 'selected' or None" t-out="place.name"/>
+                                    </select>
+                                </label>
+                                <button type="submit" class="jcp-btn jcp-btn-primary">Search</button>
+                                <a t-if="filtered" class="jcp-link" t-att-href="career.website_url + '#jcp-jobs'">Clear</a>
+                            </form>
+                        </div>
+
+                        <t t-if="jobs">
+                            <t t-call="{{ 'jobiba_career_pages.layout_' + career.layout }}"/>
+                            <div class="jcp-pager" t-if="pager['page_count'] &gt; 1"><t t-call="website.pager"/></div>
+                        </t>
+                        <div t-else="" class="jcp-empty" role="status">
+                            <t t-if="filtered">
+                                <p><strong>No open role matches that search.</strong></p>
+                                <a class="jcp-btn jcp-btn-outline" t-att-href="career.website_url + '#jcp-jobs'">See every open role</a>
+                            </t>
+                            <t t-else=""><p><strong>There are no open roles right now.</strong> New roles are listed here when they open.</p></t>
+                        </div>
+                    </div>
+                </section>
+
+                <section t-if="career.cta_title" class="jcp-cta">
+                    <div class="container">
+                        <h2 class="jcp-h2" t-out="career.cta_title"/>
+                        <p t-if="career.cta_text" t-out="career.cta_text"/>
+                        <a t-if="career.cta_url and career.cta_label" class="jcp-btn jcp-btn-primary" t-att-href="career.cta_url" t-out="career.cta_label"/>
+                    </div>
+                </section>
+
+                <p t-if="career.show_jobiba_credit" class="jcp-credit">
+                    Jobs also on <a href="https://jobiba.com" target="_blank" rel="noopener">Jobiba</a>
+                </p>
+            </div>
+        </t>
+    </template>
+</odoo>

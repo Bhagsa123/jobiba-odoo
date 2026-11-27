@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="career_page_view_form" model="ir.ui.view">
+        <field name="name">jobiba.career.page.form</field>
+        <field name="model">jobiba.career.page</field>
+        <field name="arch" type="xml">
+            <form string="Career page">
+                <header>
+                    <button name="action_open_page" type="object" string="Open the page" class="btn-primary" icon="fa-external-link"/>
+                    <button name="action_add_to_menu" type="object" string="Add to the website menu"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="is_published" widget="website_redirect_button"/>
+                    </div>
+                    <div class="alert alert-info" role="status" invisible="is_published">
+                        Not published yet: visitors get "page not found". Use the Publish button on the page itself, or the button on the right.
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Careers"/></h1>
+                    </div>
+                    <group>
+                        <group string="Design">
+                            <field name="layout" widget="radio"/>
+                            <field name="accent_color" widget="color"/>
+                            <field name="hero_image" widget="image" options="{'size': [220, 0]}"/>
+                        </group>
+                        <group string="Address and scope">
+                            <field name="slug"/>
+                            <field name="website_url" widget="url" string="Page"/>
+                            <field name="website_id" options="{'no_create': True}" groups="website.group_multi_website"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="department_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="job_count" string="Published jobs listed"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Headline" name="headline">
+                            <group>
+                                <field name="hero_title"/>
+                                <field name="hero_subtitle"/>
+                            </group>
+                            <separator string="Introduction (optional)"/>
+                            <field name="intro" nolabel="1"/>
+                        </page>
+                        <page string="Perks" name="perks">
+                            <group><field name="show_perks"/></group>
+                            <p class="text-muted">List only what your company really offers. Leave the list empty to hide the section.</p>
+                            <field name="perk_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="icon"/>
+                                    <field name="name"/>
+                                    <field name="text"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Job list" name="jobs">
+                            <group>
+                                <group>
+                                    <field name="show_search"/>
+                                    <field name="show_department_filter"/>
+                                    <field name="show_location_filter"/>
+                                </group>
+                                <group>
+                                    <field name="show_stats"/>
+                                    <field name="show_salary"/>
+                                    <field name="show_jobiba_credit"/>
+                                </group>
+                            </group>
+                            <p class="text-muted">The page lists job positions that are published on the website. Pay is shown only from the job's Jobiba tab (lowest, highest, currency) and never from internal salary data.</p>
+                        </page>
+                        <page string="Closing section" name="cta">
+                            <group>
+                                <field name="cta_title"/>
+                                <field name="cta_text"/>
+                                <field name="cta_label"/>
+                                <field name="cta_url"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="career_page_view_list" model="ir.ui.view">
+        <field name="name">jobiba.career.page.list</field>
+        <field name="model">jobiba.career.page</field>
+        <field name="arch" type="xml">
+            <list string="Career pages">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="layout"/>
+                <field name="website_url" widget="url"/>
+                <field name="job_count" string="Jobs listed"/>
+                <field name="is_published" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_career_page" model="ir.actions.act_window">
+        <field name="name">Career pages</field>
+        <field name="res_model">jobiba.career.page</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first career page</p>
+            <p>Pick a layout and a colour, write a headline, and publish. The page lists the jobs you published on your website.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_career_pages" name="Career pages" parent="jobiba_recruitment_connector.menu_jobiba_root"
+              action="action_career_page" sequence="15"/>
+    <menuitem id="menu_career_pages_website" name="Career pages" parent="website.menu_website_global_configuration"
+              action="action_career_page" sequence="60"/>
+</odoo>

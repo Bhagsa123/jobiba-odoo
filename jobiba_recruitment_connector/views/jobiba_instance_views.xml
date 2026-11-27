@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="jobiba_instance_view_form" model="ir.ui.view">
+        <field name="name">jobiba.instance.form</field>
+        <field name="model">jobiba.instance</field>
+        <field name="arch" type="xml">
+            <form string="Jobiba connection">
+                <header>
+                    <button name="action_open_connect_wizard" type="object" string="Connect" class="btn-primary"
+                            invisible="state == 'connected'" groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+                    <button name="action_open_connect_wizard" type="object" string="Change key or secret"
+                            invisible="state != 'connected'" groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+                    <button name="action_test_connection" type="object" string="Test connection"
+                            invisible="not api_key_set" groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+                    <button name="action_process_queue" type="object" string="Send queue now"
+                            invisible="state not in ('connected', 'attention')"/>
+                    <button name="action_disconnect" type="object" string="Disconnect"
+                            invisible="state in ('draft', 'disconnected')"
+                            confirm="Disconnect from Jobiba? The API key and the signing secret are removed from Odoo. Jobs already on Jobiba stay there. To revoke the key itself, make a new key in your Jobiba dashboard."
+                            groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,connected"/>
+                </header>
+                <div class="alert alert-danger mb-0" role="alert" invisible="state != 'attention'">
+                    <strong>Jobiba needs attention.</strong> <field name="last_error" nolabel="1" class="d-inline"/>
+                    <span invisible="last_error_category != 'plan'"> See your plan:
+                        <field name="billing_url" widget="url" nolabel="1" class="d-inline"/></span>
+                </div>
+                <div class="alert alert-warning mb-0" role="alert" invisible="not paused_until">
+                    The queue is waiting until <field name="paused_until" nolabel="1" class="d-inline"/> (request limit or repeated failures). It continues by itself.
+                </div>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_mappings" type="object" class="oe_stat_button" icon="fa-briefcase">
+                            <field name="job_published_count" widget="statinfo" string="Published"/>
+                        </button>
+                        <button name="action_view_applications" type="object" class="oe_stat_button" icon="fa-users">
+                            <field name="application_count" widget="statinfo" string="Applications"/>
+                        </button>
+                        <button name="action_view_queue" type="object" class="oe_stat_button" icon="fa-paper-plane">
+                            <field name="queue_pending_count" widget="statinfo" string="In queue"/>
+                        </button>
+                        <button name="action_view_events" type="object" class="oe_stat_button" icon="fa-bolt"
+                                groups="jobiba_recruitment_connector.group_jobiba_manager">
+                            <field name="event_error_count" widget="statinfo" string="Events to check"/>
+                        </button>
+                        <button name="action_view_logs" type="object" class="oe_stat_button" icon="fa-list-alt"
+                                groups="jobiba_recruitment_connector.group_jobiba_manager" string="Log"/>
+                    </div>
+                    <field name="health" invisible="1"/>
+                    <field name="last_error_category" invisible="1"/>
+                    <field name="api_key_set" invisible="1"/>
+                    <div class="o_jobiba_hero">
+                        <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                            <div>
+                                <p class="o_jobiba_hero_title"><field name="name" placeholder="Jobiba" class="text-white"/></p>
+                                <p class="o_jobiba_hero_sub">Odoo keeps your vacancies and applicants. Jobiba brings the candidates.</p>
+                            </div>
+                            <div>
+                                <span class="o_jobiba_pill ok" invisible="health != 'ok'">Connected</span>
+                                <span class="o_jobiba_pill waiting" invisible="health != 'waiting'">Waiting</span>
+                                <span class="o_jobiba_pill problem" invisible="health != 'problem'">Needs attention</span>
+                                <span class="o_jobiba_pill" invisible="health != 'off'">Not connected</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_jobiba_tiles">
+                        <div class="o_jobiba_tile"><div class="o_jobiba_tile_num"><field name="job_published_count"/></div><div class="o_jobiba_tile_label">Jobs published</div></div>
+                        <div class="o_jobiba_tile"><div class="o_jobiba_tile_num"><field name="job_review_count"/></div><div class="o_jobiba_tile_label">Waiting for Jobiba review</div></div>
+                        <div class="o_jobiba_tile warn"><div class="o_jobiba_tile_num"><field name="queue_pending_count"/></div><div class="o_jobiba_tile_label">In the queue</div></div>
+                        <div class="o_jobiba_tile bad"><div class="o_jobiba_tile_num"><field name="job_failed_count"/></div><div class="o_jobiba_tile_label">Jobs to fix</div></div>
+                        <div class="o_jobiba_tile bad"><div class="o_jobiba_tile_num"><field name="queue_blocked_count"/></div><div class="o_jobiba_tile_label">Blocked or gave up</div></div>
+                        <div class="o_jobiba_tile"><div class="o_jobiba_tile_num"><field name="application_count"/></div><div class="o_jobiba_tile_label">Applications received</div></div>
+                    </div>
+                    <group>
+                        <group string="Connection">
+                            <field name="company_id" groups="base.group_multi_company" readonly="state == 'connected'"/>
+                            <field name="base_url" readonly="1"/>
+                            <field name="api_key_set"/>
+                            <field name="api_key_saved_at" invisible="not api_key_saved_at"/>
+                            <field name="data_consent_at" invisible="not data_consent_at"/>
+                            <field name="data_consent_user_id" invisible="not data_consent_at" options="{'no_open': True}"/>
+                            <field name="last_success_at"/>
+                            <field name="rate_limit" invisible="not rate_limit"/>
+                            <field name="rate_remaining" invisible="not rate_limit"/>
+                        </group>
+                        <group string="Applications from Jobiba">
+                            <field name="webhook_secret_set"/>
+                            <field name="webhook_verified_at"/>
+                            <div colspan="2" class="text-muted" invisible="webhook_verified_at">
+                                Not confirmed yet. Register the webhook address in Jobiba (Connect shows it), paste the signing secret, then press "Send a test" in Jobiba.
+                            </div>
+                            <field name="application_import"/>
+                            <field name="source_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Publishing rules" name="rules">
+                            <group>
+                                <group>
+                                    <field name="apply_mode" widget="radio"/>
+                                    <field name="description_format"/>
+                                </group>
+                                <group>
+                                    <field name="require_approval"/>
+                                    <field name="auto_publish"/>
+                                    <field name="auto_publish_department_ids" widget="many2many_tags" invisible="not auto_publish"/>
+                                    <field name="batch_size"/>
+                                    <field name="retention_days"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Plan and promotion" name="plan">
+                            <div class="alert alert-warning" role="status" invisible="integration_enabled or not plan_checked_at">
+                                The connection is switched off in Jobiba. Open Jobiba, Employer dashboard, Integrations, and switch on "Connect my hiring system". Until then Jobiba accepts no jobs from Odoo and sends no applications.
+                            </div>
+                            <group>
+                                <group string="Your Jobiba plan">
+                                    <field name="plan_name"/>
+                                    <field name="integration_enabled"/>
+                                    <field name="job_limit_text"/>
+                                    <field name="jobs_open"/>
+                                    <field name="applicant_details"/>
+                                    <field name="plan_message" invisible="not plan_message"/>
+                                    <field name="plan_checked_at"/>
+                                </group>
+                                <group string="In Odoo">
+                                    <field name="import_details"/>
+                                    <field name="last_pull_at"/>
+                                </group>
+                            </group>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button name="action_refresh_plan" type="object" string="Read plan from Jobiba" class="btn-secondary"/>
+                                <button name="action_open_integrations" type="object" string="Connection switch on Jobiba" icon="fa-external-link"/>
+                                <button name="action_open_billing" type="object" string="Plans and billing" icon="fa-external-link"/>
+                                <button name="action_open_promote" type="object" string="Promote jobs on Jobiba" icon="fa-bullhorn"/>
+                            </div>
+                            <p>Without a paid Jobiba plan the connection holds a few open jobs (the number above) and every applicant arrives in Odoo with a name and a link to the application on Jobiba. On a paid plan with applicant sync switched on in Jobiba, contact details, answers and the CV are written into the Odoo applicant, for applications whose candidate was shown Jobiba's transfer notice.</p>
+                            <p class="text-muted">Plans, featured placement and invoices are bought on Jobiba's own checkout. This app never asks for card details and Jobiba decides what the plan allows: Odoo only shows it.</p>
+                        </page>
+                        <page string="How it works" name="help">
+                            <ol class="o_jobiba_steps">
+                                <li>A recruitment administrator ticks <strong>Approved for Jobiba</strong> on a job position.</li>
+                                <li>The recruiter opens <strong>Publish on Jobiba</strong>, checks the preview and publishes.</li>
+                                <li>Jobiba reviews each new job ad before it goes live. Later edits in Odoo are sent by themselves.</li>
+                                <li>When someone applies on Jobiba, an applicant appears in that job's pipeline with the source Jobiba.</li>
+                                <li>If the candidate withdraws on Jobiba, the Odoo applicant gets a note. Its stage is not changed.</li>
+                            </ol>
+                            <p class="text-muted">Closing a listing: "Close on Jobiba" on the job, or archiving the job in Odoo, takes the listing offline on Jobiba. Applications already made stay in both places.</p>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="jobiba_instance_view_list" model="ir.ui.view">
+        <field name="name">jobiba.instance.list</field>
+        <field name="model">jobiba.instance</field>
+        <field name="arch" type="xml">
+            <list string="Jobiba connections">
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state" widget="badge" decoration-success="state == 'connected'" decoration-danger="state == 'attention'" decoration-muted="state in ('draft', 'disconnected')"/>
+                <field name="job_published_count" string="Published"/>
+                <field name="queue_pending_count" string="In queue"/>
+                <field name="application_count" string="Applications"/>
+                <field name="last_success_at"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_jobiba_instance" model="ir.actions.act_window">
+        <field name="name">Jobiba</field>
+        <field name="res_model">jobiba.instance</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Connect this company to Jobiba</p>
+            <p>Create a connection, paste your Jobiba API key, and publish your first job position.</p>
+        </field>
+    </record>
+</odoo>

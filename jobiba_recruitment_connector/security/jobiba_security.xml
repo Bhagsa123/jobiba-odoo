@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_jobiba" model="ir.module.category">
+        <field name="name">Jobiba</field>
+        <field name="description">Who may publish jobs on Jobiba and who may configure the connection.</field>
+        <field name="sequence">22</field>
+    </record>
+
+    <record id="res_groups_privilege_jobiba" model="res.groups.privilege">
+        <field name="name">Jobiba</field>
+        <field name="sequence">22</field>
+        <field name="category_id" ref="module_category_jobiba"/>
+    </record>
+
+    <record id="group_jobiba_user" model="res.groups">
+        <field name="name">Recruiter: publish jobs and see sync state</field>
+        <field name="privilege_id" ref="res_groups_privilege_jobiba"/>
+        <field name="implied_ids" eval="[(4, ref('hr_recruitment.group_hr_recruitment_interviewer'))]"/>
+    </record>
+
+    <record id="group_jobiba_manager" model="res.groups">
+        <field name="name">Integration administrator: connection, keys and logs</field>
+        <field name="privilege_id" ref="res_groups_privilege_jobiba"/>
+        <field name="implied_ids" eval="[(4, ref('group_jobiba_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <!-- Recruitment officers publish; recruitment administrators approve (checked in code). -->
+    <record id="hr_recruitment.group_hr_recruitment_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_jobiba_user'))]"/>
+    </record>
+</odoo>

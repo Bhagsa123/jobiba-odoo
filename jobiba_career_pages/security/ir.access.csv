@@ -1,0 +1,11 @@
+id,name,model_id,group_id/id,operation,domain
+access_career_page_public,jobiba.career.page public,jobiba.career.page,base.group_public,r,"[('website_published', '=', True)]"
+access_career_page_portal,jobiba.career.page portal,jobiba.career.page,base.group_portal,r,"[('website_published', '=', True)]"
+access_career_page_user,jobiba.career.page user,jobiba.career.page,base.group_user,r,
+access_career_page_designer,jobiba.career.page designer,jobiba.career.page,website.group_website_designer,crud,
+access_career_page_recruiter,jobiba.career.page recruiter,jobiba.career.page,hr_recruitment.group_hr_recruitment_manager,crud,
+access_career_perk_public,jobiba.career.perk public,jobiba.career.perk,base.group_public,r,
+access_career_perk_portal,jobiba.career.perk portal,jobiba.career.perk,base.group_portal,r,
+access_career_perk_user,jobiba.career.perk user,jobiba.career.perk,base.group_user,r,
+access_career_perk_designer,jobiba.career.perk designer,jobiba.career.perk,website.group_website_designer,crud,
+access_career_perk_recruiter,jobiba.career.perk recruiter,jobiba.career.perk,hr_recruitment.group_hr_recruitment_manager,crud,

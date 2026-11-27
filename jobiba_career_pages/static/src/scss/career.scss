@@ -1,0 +1,117 @@
+// Jobiba Career Pages. Everything is scoped under .jcp; the accent colour
+// comes from the page record as --jcp-accent.
+.jcp {
+    --jcp-accent: #0f9d6e;
+    --jcp-ink: #0b1f1a;
+    --jcp-muted: #5b6b66;
+    --jcp-line: #e3e8e6;
+    --jcp-soft: #f4f7f6;
+    --jcp-radius: 16px;
+    color: var(--jcp-ink);
+
+    .jcp-draft { background: #fff4d6; color: #5a4300; text-align: center; padding: 10px 16px; font-weight: 600; }
+    .jcp-eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 700; opacity: .8; margin: 0 0 10px; }
+    .jcp-h2 { font-size: clamp(1.4rem, calc(1.1rem + 1.2vw), 2rem); font-weight: 800; margin: 0 0 20px; letter-spacing: -.01em; }
+    .jcp-count {
+        display: inline-block; min-width: 1.9em; padding: 2px 10px; margin-left: 8px; border-radius: 999px; vertical-align: middle;
+        background: color-mix(in srgb, var(--jcp-accent) 14%, #fff); color: var(--jcp-ink); font-size: .85rem; font-weight: 700; text-align: center;
+    }
+
+    // Buttons: 44 px tall targets.
+    .jcp-btn {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 22px;
+        border-radius: 999px; font-weight: 700; text-decoration: none; border: 2px solid transparent; cursor: pointer;
+        transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+        &:focus-visible { outline: 3px solid color-mix(in srgb, var(--jcp-accent) 55%, #fff); outline-offset: 2px; }
+    }
+    .jcp-btn-primary { background: var(--jcp-accent); color: #fff; &:hover { color: #fff; transform: translateY(-1px); box-shadow: 0 8px 20px color-mix(in srgb, var(--jcp-accent) 35%, transparent); } }
+    .jcp-btn-outline { border-color: var(--jcp-accent); color: var(--jcp-ink); background: #fff; &:hover { background: color-mix(in srgb, var(--jcp-accent) 10%, #fff); color: var(--jcp-ink); } }
+    .jcp-btn-light { background: #fff; color: var(--jcp-ink); &:hover { color: var(--jcp-ink); transform: translateY(-1px); } }
+    .jcp-link { font-weight: 600; color: var(--jcp-ink); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
+
+    // Hero
+    .jcp-hero {
+        padding: clamp(48px, 9vw, 110px) 0 clamp(40px, 7vw, 84px); color: #fff; background-size: cover; background-position: center;
+        background-color: var(--jcp-ink);
+        background-image: radial-gradient(900px 420px at 85% -10%, color-mix(in srgb, var(--jcp-accent) 70%, transparent), transparent 70%),
+                          radial-gradient(700px 380px at 0% 110%, color-mix(in srgb, var(--jcp-accent) 35%, transparent), transparent 70%);
+    }
+    .jcp-hero-title { font-size: clamp(2rem, calc(1.3rem + 3.4vw), 3.6rem); font-weight: 800; line-height: 1.05; letter-spacing: -.02em; margin: 0 0 14px; max-width: 18ch; }
+    .jcp-hero-sub { font-size: clamp(1rem, calc(.95rem + .4vw), 1.25rem); opacity: .9; max-width: 52ch; margin: 0 0 26px; }
+    .jcp-stats {
+        list-style: none; display: flex; flex-wrap: wrap; gap: 12px; padding: 0; margin: 0 0 28px;
+        li { background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .2); border-radius: 14px; padding: 10px 18px; backdrop-filter: blur(4px); }
+        strong { font-size: 1.5rem; font-weight: 800; margin-right: 6px; }
+        span { opacity: .9; }
+    }
+
+    .jcp-intro { padding: 44px 0 8px; font-size: 1.08rem; .container { max-width: 760px; } }
+
+    // Perks
+    .jcp-perks { padding: 48px 0 12px; }
+    .jcp-perk-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .jcp-perk {
+        border: 1px solid var(--jcp-line); border-radius: var(--jcp-radius); padding: 20px; display: grid; gap: 6px; background: #fff;
+        i { font-size: 1.3rem; color: var(--jcp-accent); }
+        span { color: var(--jcp-muted); }
+    }
+
+    // Jobs
+    .jcp-jobs { padding: 52px 0; }
+    .jcp-jobs-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between; margin-bottom: 22px; .jcp-h2 { margin: 0; } }
+    .jcp-filters {
+        display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+        .jcp-field { margin: 0; }
+        input, select {
+            min-height: 44px; border: 1px solid var(--jcp-line); border-radius: 999px; padding: 0 16px; font-size: 16px; background: #fff; color: var(--jcp-ink); max-width: 100%;
+            &:focus-visible { outline: 3px solid color-mix(in srgb, var(--jcp-accent) 45%, #fff); outline-offset: 1px; }
+        }
+    }
+    .jcp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .jcp-card {
+        border: 1px solid var(--jcp-line); border-radius: var(--jcp-radius); padding: 20px; background: #fff; display: flex; flex-direction: column; gap: 10px;
+        transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+        &:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--jcp-accent) 45%, var(--jcp-line)); box-shadow: 0 14px 30px rgba(11, 31, 26, .08); }
+    }
+    .jcp-card-top { display: flex; flex-wrap: wrap; gap: 6px; min-height: 26px; }
+    .jcp-chip { font-size: .76rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--jcp-accent) 14%, #fff); }
+    .jcp-chip-soft { background: var(--jcp-soft); color: var(--jcp-muted); }
+    .jcp-card-title { font-size: 1.15rem; font-weight: 800; margin: 0; a { color: inherit; text-decoration: none; &:hover { text-decoration: underline; } } }
+    .jcp-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; color: var(--jcp-muted); font-size: .92rem; }
+    .jcp-pay { color: var(--jcp-ink); font-weight: 700; }
+    .jcp-card-actions { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; margin-top: auto; padding-top: 8px; }
+
+    .jcp-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--jcp-line); }
+    .jcp-row {
+        display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; padding: 18px 4px; border-bottom: 1px solid var(--jcp-line);
+        &:hover { background: var(--jcp-soft); }
+    }
+    .jcp-row-main { min-width: 220px; flex: 1; }
+    .jcp-row-title { font-size: 1.1rem; font-weight: 800; color: var(--jcp-ink); text-decoration: none; display: inline-block; padding: 4px 0; &:hover { text-decoration: underline; } }
+
+    .jcp-group { margin-bottom: 34px; }
+    .jcp-group-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 14px; padding-left: 12px; border-left: 4px solid var(--jcp-accent); }
+
+    .jcp-spot {
+        border-radius: 22px; padding: clamp(22px, 4vw, 40px); margin-bottom: 22px; color: #fff; display: grid; gap: 10px;
+        background: linear-gradient(135deg, var(--jcp-ink), color-mix(in srgb, var(--jcp-accent) 75%, var(--jcp-ink)));
+        .jcp-meta, .jcp-pay, .jcp-link { color: #fff; }
+        .jcp-btn-primary { background: #fff; color: var(--jcp-ink); }
+    }
+    .jcp-spot-title { font-size: clamp(1.5rem, calc(1.2rem + 1.6vw), 2.4rem); font-weight: 800; margin: 0; a { color: #fff; text-decoration: none; &:hover { text-decoration: underline; } } }
+
+    .jcp-empty { border: 1px dashed var(--jcp-line); border-radius: var(--jcp-radius); padding: 36px 20px; text-align: center; background: var(--jcp-soft); }
+    .jcp-pager { margin-top: 26px; display: flex; justify-content: center; }
+
+    .jcp-cta { padding: 56px 0; text-align: center; background: var(--jcp-soft); p { color: var(--jcp-muted); max-width: 52ch; margin: 0 auto 20px; } .jcp-h2 { margin-bottom: 10px; } }
+    .jcp-credit { text-align: center; font-size: .82rem; color: var(--jcp-muted); margin: 0; padding: 14px; a { color: inherit; font-weight: 600; } }
+
+    // Ledger: a calmer hero.
+    &.jcp-ledger .jcp-hero:not(.jcp-hero-image) { background-image: none; background-color: var(--jcp-soft); color: var(--jcp-ink); .jcp-stats li { background: #fff; border-color: var(--jcp-line); } .jcp-btn-light { background: var(--jcp-accent); color: #fff; } }
+
+    @media (max-width: 575.98px) {
+        .jcp-filters { width: 100%; .jcp-field, input, select, .jcp-btn { width: 100%; } }
+        .jcp-row .jcp-btn { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { .jcp-btn, .jcp-card { transition: none; } }
+}
