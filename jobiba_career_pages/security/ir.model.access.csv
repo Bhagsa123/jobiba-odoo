@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_career_page_public,jobiba.career.page public,model_jobiba_career_page,base.group_public,1,0,0,0
+access_career_page_portal,jobiba.career.page portal,model_jobiba_career_page,base.group_portal,1,0,0,0
+access_career_page_user,jobiba.career.page user,model_jobiba_career_page,base.group_user,1,0,0,0
+access_career_page_designer,jobiba.career.page designer,model_jobiba_career_page,website.group_website_designer,1,1,1,1
+access_career_page_recruiter,jobiba.career.page recruiter,model_jobiba_career_page,hr_recruitment.group_hr_recruitment_manager,1,1,1,1
+access_career_perk_public,jobiba.career.perk public,model_jobiba_career_perk,base.group_public,1,0,0,0
+access_career_perk_portal,jobiba.career.perk portal,model_jobiba_career_perk,base.group_portal,1,0,0,0
+access_career_perk_user,jobiba.career.perk user,model_jobiba_career_perk,base.group_user,1,0,0,0
+access_career_perk_designer,jobiba.career.perk designer,model_jobiba_career_perk,website.group_website_designer,1,1,1,1
+access_career_perk_recruiter,jobiba.career.perk recruiter,model_jobiba_career_perk,hr_recruitment.group_hr_recruitment_manager,1,1,1,1

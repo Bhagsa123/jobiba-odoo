@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- A ready page, not published: nothing appears on the site until you publish it. -->
+    <record id="career_page_default" model="jobiba.career.page">
+        <field name="name">Careers</field>
+        <field name="slug">careers</field>
+        <field name="layout">aurora</field>
+        <field name="is_published" eval="False"/>
+    </record>
+</odoo>

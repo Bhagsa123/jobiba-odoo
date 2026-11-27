@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_jobiba_root" name="Jobiba" parent="hr_recruitment.menu_hr_recruitment_root" sequence="85"
+              groups="jobiba_recruitment_connector.group_jobiba_user"/>
+    <menuitem id="menu_jobiba_overview" name="Connection" parent="menu_jobiba_root" action="action_jobiba_instance" sequence="10"/>
+    <menuitem id="menu_jobiba_jobs" name="Jobs on Jobiba" parent="menu_jobiba_root" action="action_jobiba_job_mapping" sequence="20"/>
+    <menuitem id="menu_jobiba_queue" name="Publishing queue" parent="menu_jobiba_root" action="action_jobiba_sync_job" sequence="30"/>
+    <menuitem id="menu_jobiba_applications" name="Applications received" parent="menu_jobiba_root" action="action_jobiba_application_mapping" sequence="40"/>
+    <menuitem id="menu_jobiba_events" name="Webhook events" parent="menu_jobiba_root" action="action_jobiba_webhook_event" sequence="50"
+              groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+    <menuitem id="menu_jobiba_logs" name="Log" parent="menu_jobiba_root" action="action_jobiba_sync_log" sequence="60"
+              groups="jobiba_recruitment_connector.group_jobiba_manager"/>
+</odoo>

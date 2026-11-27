@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_job_view_form_jobiba" model="ir.ui.view">
+        <field name="name">hr.job.form.jobiba</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="priority">40</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_jobiba_applications" type="object" class="oe_stat_button" icon="fa-users"
+                        invisible="not jobiba_application_count" groups="jobiba_recruitment_connector.group_jobiba_user">
+                    <field name="jobiba_application_count" widget="statinfo" string="From Jobiba"/>
+                </button>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Jobiba" name="jobiba_page" groups="jobiba_recruitment_connector.group_jobiba_user">
+                    <field name="jobiba_connected" invisible="1"/>
+                    <div class="alert alert-info" role="status" invisible="jobiba_connected">
+                        This company is not connected to Jobiba. An integration administrator connects it in Recruitment › Jobiba.
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="not jobiba_last_error">
+                        <field name="jobiba_last_error" nolabel="1"/>
+                        <div invisible="not jobiba_problems" class="mt-1"><field name="jobiba_problems" nolabel="1"/></div>
+                    </div>
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3" invisible="not jobiba_connected">
+                        <field name="jobiba_state" widget="badge" decoration-success="jobiba_state == 'published'" decoration-info="jobiba_state in ('queued', 'in_review')" decoration-danger="jobiba_state in ('failed', 'not_approved')" decoration-muted="jobiba_state in ('draft', 'stopped', 'closed')"/>
+                        <field name="jobiba_connection_state" widget="badge" decoration-success="jobiba_connection_state == 'connected'" decoration-danger="jobiba_connection_state == 'attention'"/>
+                        <button name="action_jobiba_preview" type="object" string="Preview and publish" class="btn-primary"
+                                invisible="jobiba_state in ('published', 'in_review', 'queued')"/>
+                        <button name="action_jobiba_preview" type="object" string="Preview"
+                                invisible="jobiba_state not in ('published', 'in_review', 'queued')"/>
+                        <button name="action_jobiba_sync_now" type="object" string="Sync now"
+                                invisible="jobiba_state in ('draft', 'stopped', 'orphan')"/>
+                        <button name="action_jobiba_open_listing" type="object" string="View on Jobiba" icon="fa-external-link"
+                                invisible="not jobiba_listing_url"/>
+                        <button name="action_jobiba_promote" type="object" string="Promote on Jobiba" icon="fa-bullhorn"
+                                invisible="jobiba_state != 'published'"/>
+                        <button name="action_jobiba_stop" type="object" string="Close on Jobiba"
+                                invisible="jobiba_state in ('draft', 'stopped', 'orphan')"
+                                confirm="Take this listing offline on Jobiba and stop sending this job's changes? Applications already made stay in Odoo and on Jobiba."/>
+                    </div>
+                    <group>
+                        <group string="Shown on Jobiba">
+                            <field name="jobiba_approved"/>
+                            <field name="jobiba_location" placeholder="e.g. Ahmedabad, Gujarat, India"/>
+                            <field name="jobiba_job_type"/>
+                            <field name="jobiba_remote_type"/>
+                            <field name="jobiba_experience_level"/>
+                            <field name="jobiba_apply_url" widget="url" placeholder="https://"/>
+                        </group>
+                        <group string="Pay (optional, published)">
+                            <field name="jobiba_salary_min"/>
+                            <field name="jobiba_salary_max"/>
+                            <field name="jobiba_salary_currency_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="jobiba_salary_period" required="jobiba_salary_min or jobiba_salary_max"/>
+                        </group>
+                        <group string="Sync">
+                            <field name="jobiba_last_synced_at"/>
+                            <field name="jobiba_next_retry_at" invisible="not jobiba_next_retry_at"/>
+                            <field name="jobiba_listing_url" widget="url" invisible="not jobiba_listing_url"/>
+                            <field name="jobiba_reference" invisible="not jobiba_reference" groups="base.group_no_one"/>
+                        </group>
+                    </group>
+                    <separator string="Description for Jobiba (optional)"/>
+                    <p class="text-muted">Leave empty to send this job's own description and requirements. Internal notes are never sent.</p>
+                    <field name="jobiba_description" nolabel="1"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_job_view_search_jobiba" model="ir.ui.view">
+        <field name="name">hr.job.search.jobiba</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_job_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter name="jobiba_approved" string="Approved for Jobiba" domain="[('jobiba_approved', '=', True)]"/>
+                <filter name="jobiba_published" string="On Jobiba" domain="[('jobiba_mapping_ids.remote_state', 'in', ('published', 'in_review'))]"/>
+                <filter name="jobiba_failed" string="Jobiba: to fix" domain="[('jobiba_mapping_ids.remote_state', '=', 'failed')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Bulk publish from the job list -->
+    <record id="action_hr_job_jobiba_publish" model="ir.actions.server">
+        <field name="name">Publish on Jobiba</field>
+        <field name="model_id" ref="hr.model_hr_job"/>
+        <field name="binding_model_id" ref="hr.model_hr_job"/>
+        <field name="binding_view_types">list,kanban</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_jobiba_preview()</field>
+    </record>
+    <!-- The groups field of a server action is groups_id up to 18.0 and group_ids from 19.0. -->
+    <function model="ir.actions.server" name="write"
+              eval="[[ref('action_hr_job_jobiba_publish')], {('group_ids' if version >= '19' else 'groups_id'): [(4, ref('jobiba_recruitment_connector.group_jobiba_user'))]}]"/>
+
+    <record id="hr_contract_type_view_list_jobiba" model="ir.ui.view">
+        <field name="name">hr.contract.type.list.jobiba</field>
+        <field name="model" eval="'hr.employee.type' if version >= '20' else 'hr.contract.type'"/>
+        <field name="inherit_id" ref="hr.hr_contract_type_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="jobiba_job_type" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

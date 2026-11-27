@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="jobiba_sync_log_view_list" model="ir.ui.view">
+        <field name="name">jobiba.sync.log.list</field>
+        <field name="model">jobiba.sync.log</field>
+        <field name="arch" type="xml">
+            <list string="Jobiba log" create="0" edit="0" decoration-danger="level in ('error', 'security')" decoration-warning="level == 'warning'">
+                <field name="create_date" string="When"/>
+                <field name="level" widget="badge"/>
+                <field name="operation"/>
+                <field name="message"/>
+                <field name="http_status" optional="show"/>
+                <field name="job_id" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="correlation_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="jobiba_sync_log_view_search" model="ir.ui.view">
+        <field name="name">jobiba.sync.log.search</field>
+        <field name="model">jobiba.sync.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="operation"/>
+                <field name="correlation_id"/>
+                <field name="job_id"/>
+                <filter name="problems" string="Errors and security" domain="[('level', 'in', ('error', 'security'))]"/>
+                <filter name="warnings" string="Warnings" domain="[('level', '=', 'warning')]"/>
+                <filter name="today" string="Today" domain="[('create_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                <group>
+                    <filter name="by_operation" string="Operation" context="{'group_by': 'operation'}"/>
+                    <filter name="by_company" string="Company" context="{'group_by': 'company_id'}"/>
+                    <filter name="by_day" string="Day" context="{'group_by': 'create_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_jobiba_sync_log" model="ir.actions.act_window">
+        <field name="name">Jobiba log</field>
+        <field name="res_model">jobiba.sync.log</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="jobiba_webhook_event_view_list" model="ir.ui.view">
+        <field name="name">jobiba.webhook.event.list</field>
+        <field name="model">jobiba.webhook.event</field>
+        <field name="arch" type="xml">
+            <list string="Webhook events" create="0" edit="0" decoration-danger="state == 'error'">
+                <header>
+                    <button name="action_reprocess" type="object" string="Reprocess"/>
+                </header>
+                <field name="create_date" string="Received"/>
+                <field name="event_type"/>
+                <field name="state" widget="badge" decoration-success="state == 'processed'" decoration-danger="state == 'error'" decoration-muted="state == 'ignored'"/>
+                <field name="applicant_id"/>
+                <field name="error"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="delivery_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="jobiba_webhook_event_view_search" model="ir.ui.view">
+        <field name="name">jobiba.webhook.event.search</field>
+        <field name="model">jobiba.webhook.event</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="delivery_id"/>
+                <field name="event_type"/>
+                <filter name="errors" string="Needs a person" domain="[('state', '=', 'error')]"/>
+                <filter name="processed" string="Processed" domain="[('state', '=', 'processed')]"/>
+                <group>
+                    <filter name="by_type" string="Event" context="{'group_by': 'event_type'}"/>
+                    <filter name="by_state" string="State" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_jobiba_webhook_event" model="ir.actions.act_window">
+        <field name="name">Webhook events</field>
+        <field name="res_model">jobiba.webhook.event</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>
